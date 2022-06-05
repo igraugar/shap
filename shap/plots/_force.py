@@ -32,7 +32,7 @@ from ..plots._force_matplotlib import draw_additive_plot
 
 def force(base_value, shap_values=None, features=None, feature_names=None, out_names=None, link="identity",
           plot_cmap="RdBu", matplotlib=False, show=True, figsize=(20,3), ordering_keys=None, ordering_keys_time_format=None,
-          text_rotation=0, contribution_threshold=0.05):
+          text_rotation=0, contribution_threshold=0.05, fontsize=14):
     """ Visualize the given SHAP values with an additive force layout.
 
     Parameters
@@ -106,7 +106,7 @@ def force(base_value, shap_values=None, features=None, feature_names=None, out_n
     link = convert_to_link(link)
 
     if type(shap_values) != np.ndarray:
-        return visualize(shap_values)
+        return visualize(shap_values, fontsize=fontsize)
 
     # convert from a DataFrame or other types
     if str(type(features)) == "<class 'pandas.core.frame.DataFrame'>":
@@ -167,7 +167,7 @@ def force(base_value, shap_values=None, features=None, feature_names=None, out_n
                          figsize=figsize,
                          show=show,
                          text_rotation=text_rotation,
-                         min_perc=contribution_threshold)
+                         min_perc=contribution_threshold, fontsize=fontsize)
         
     else:
         if matplotlib:
@@ -203,7 +203,7 @@ def force(base_value, shap_values=None, features=None, feature_names=None, out_n
                     plot_cmap=plot_cmap, 
                     ordering_keys=ordering_keys, 
                     ordering_keys_time_format=ordering_keys_time_format, 
-                    text_rotation=text_rotation
+                    text_rotation=text_rotation, fontsize=fontsize
                 )
             
 
@@ -327,14 +327,15 @@ def verify_valid_cmap(cmap):
     return cmap
 
 def visualize(e, plot_cmap="RdBu", matplotlib=False, figsize=(20,3), show=True,
-              ordering_keys=None, ordering_keys_time_format=None, text_rotation=0, min_perc=0.05):
+              ordering_keys=None, ordering_keys_time_format=None, text_rotation=0, min_perc=0.05, fontsize=14):
     plot_cmap = verify_valid_cmap(plot_cmap)
     if isinstance(e, AdditiveExplanation):
         if matplotlib:
             return AdditiveForceVisualizer(e, plot_cmap=plot_cmap).matplotlib(figsize=figsize,
                                                                     show=show,
                                                                     text_rotation=text_rotation,
-                                                                    min_perc=min_perc)
+                                                                    min_perc=min_perc,
+                                                                    fontsize=fontsize)
         else:
             return AdditiveForceVisualizer(e, plot_cmap=plot_cmap)
     elif isinstance(e, Explanation):
@@ -422,12 +423,13 @@ class AdditiveForceVisualizer(BaseVisualizer):
   );
 </script>""".format(err_msg=err_msg, data=json.dumps(self.data), id=id_generator())
     
-    def matplotlib(self, figsize, show, text_rotation, min_perc=0.05):
+    def matplotlib(self, figsize, show, text_rotation, min_perc=0.05, fontsize=14):
         fig = draw_additive_plot(self.data,
                                  figsize=figsize,
                                  show=show,
                                  text_rotation=text_rotation,
-                                 min_perc=min_perc)
+                                 min_perc=min_perc,
+                                 fontsize=fontsize)
         
         return fig
     

@@ -77,7 +77,7 @@ def draw_bars(out_value, features, feature_type, width_separators, width_bar):
     return rectangle_list, separator_list
 
 
-def draw_labels(fig, ax, out_value, features, feature_type, offset_text, total_effect=0, min_perc=0.05, text_rotation=0):
+def draw_labels(fig, ax, out_value, features, feature_type, offset_text, total_effect=0, min_perc=0.05, text_rotation=0, fontsize=12):
     start_text = out_value
     pre_val = out_value
     
@@ -123,7 +123,7 @@ def draw_labels(fig, ax, out_value, features, feature_type, offset_text, total_e
 
         text_out_val = plt.text(start_text - sign * offset_text,
                                 -0.15, text,
-                                fontsize=12, color=colors[0],
+                                fontsize=fontsize, color=colors[0],
                                 horizontalalignment=alignement,
                                 va=va_alignment,
                                 rotation=text_rotation)
@@ -260,7 +260,7 @@ def format_data(data):
     return neg_features, total_neg, pos_features, total_pos
 
 
-def draw_output_element(out_name, out_value, ax):
+def draw_output_element(out_name, out_value, ax, fontsize=14):
     # Add output value
     x, y = np.array([[out_value, out_value], [0, 0.24]])
     line = lines.Line2D(x, y, lw=2., color='#F2F2F2')
@@ -272,43 +272,43 @@ def draw_output_element(out_name, out_value, ax):
     font.set_weight('bold')
     text_out_val = plt.text(out_value, 0.25, '{0:.2f}'.format(out_value),
                             fontproperties=font,
-                            fontsize=14,
+                            fontsize=fontsize,
                             horizontalalignment='center')
     text_out_val.set_bbox(dict(facecolor='white', edgecolor='white'))
     
     text_out_val = plt.text(out_value, 0.33, out_name,
-                            fontsize=12, alpha=0.5,
+                            fontsize=fontsize, alpha=0.5,
                             horizontalalignment='center')
     text_out_val.set_bbox(dict(facecolor='white', edgecolor='white'))
 
 
-def draw_base_element(base_value, ax):
+def draw_base_element(base_value, ax, fontsize=12):
     x, y = np.array([[base_value, base_value], [0.13, 0.25]])
     line = lines.Line2D(x, y, lw=2., color='#F2F2F2')
     line.set_clip_on(False)
     ax.add_line(line)
     
     text_out_val = plt.text(base_value, 0.33, 'base value',
-                            fontsize=12, alpha=0.5,
+                            fontsize=fontsize, alpha=0.5,
                             horizontalalignment='center')
     text_out_val.set_bbox(dict(facecolor='white', edgecolor='white'))
 
 
-def draw_higher_lower_element(out_value, offset_text):
+def draw_higher_lower_element(out_value, offset_text, fontsize=13):
     plt.text(out_value - offset_text, 0.405, 'higher',
-             fontsize=13, color='#FF0D57',
+             fontsize=fontsize, color='#FF0D57',
              horizontalalignment='right')
 
     plt.text(out_value + offset_text, 0.405, 'lower',
-             fontsize=13, color='#1E88E5',
+             fontsize=fontsize, color='#1E88E5',
              horizontalalignment='left')
     
     plt.text(out_value, 0.4, r'$\leftarrow$',
-             fontsize=13, color='#1E88E5',
+             fontsize=fontsize, color='#1E88E5',
              horizontalalignment='center')
     
     plt.text(out_value, 0.425, r'$\rightarrow$',
-             fontsize=13, color='#FF0D57',
+             fontsize=fontsize, color='#FF0D57',
              horizontalalignment='center')
 
 
@@ -337,7 +337,7 @@ def update_axis_limits(ax, total_pos, pos_features, total_neg,
             spine.set_visible(False)
 
 
-def draw_additive_plot(data, figsize, show, text_rotation=0, min_perc=0.05):
+def draw_additive_plot(data, figsize, show, text_rotation=0, min_perc=0.05, fontsize=14):
     """Draw additive plot."""
     # Turn off interactive plot
     if show is False:
@@ -383,20 +383,20 @@ def draw_additive_plot(data, figsize, show, text_rotation=0, min_perc=0.05):
     # Add labels
     total_effect = np.abs(total_neg) + total_pos
     fig, ax = draw_labels(fig, ax, out_value, neg_features, 'negative',
-                          offset_text, total_effect, min_perc=min_perc, text_rotation=text_rotation)
+                          offset_text, total_effect, min_perc=min_perc, text_rotation=text_rotation, fontsize=fontsize)
     
     fig, ax = draw_labels(fig, ax, out_value, pos_features, 'positive',
-                          offset_text, total_effect, min_perc=min_perc, text_rotation=text_rotation)
+                          offset_text, total_effect, min_perc=min_perc, text_rotation=text_rotation, fontsize=fontsize)
     
     # higher lower legend
-    draw_higher_lower_element(out_value, offset_text)
+    draw_higher_lower_element(out_value, offset_text, fontsize=fontsize)
     
     # Add label for base value
-    draw_base_element(base_value, ax)
+    draw_base_element(base_value, ax, fontsize=fontsize)
     
     # Add output label
     out_names = data['outNames'][0]
-    draw_output_element(out_names, out_value, ax)
+    # draw_output_element(out_names, out_value, ax, fontsize=fontsize)
 
     # Scale axis
     if data['link'] == 'logit':
