@@ -263,13 +263,13 @@ def format_data(data):
 def draw_output_element(out_name, out_value, ax, fontsize=14):
     # Add output value
     x, y = np.array([[out_value, out_value], [0, 0.24]])
-    line = lines.Line2D(x, y, lw=2., color='#F2F2F2')
-    line.set_clip_on(False)
-    ax.add_line(line)
+    # line = lines.Line2D(x, y, lw=2., color='#F2F2F2')
+    # line.set_clip_on(False)
+    # ax.add_line(line)
     
     font0 = FontProperties()
     font = font0.copy()
-    font.set_weight('bold')
+    # font.set_weight('bold')
     text_out_val = plt.text(out_value, 0.25, '{0:.2f}'.format(out_value),
                             fontproperties=font,
                             fontsize=fontsize,
@@ -284,9 +284,9 @@ def draw_output_element(out_name, out_value, ax, fontsize=14):
 
 def draw_base_element(base_value, ax, fontsize=12):
     x, y = np.array([[base_value, base_value], [0.13, 0.25]])
-    line = lines.Line2D(x, y, lw=2., color='#F2F2F2')
-    line.set_clip_on(False)
-    ax.add_line(line)
+    # line = lines.Line2D(x, y, lw=2., color='#F2F2F2')
+    # line.set_clip_on(False)
+    # ax.add_line(line)
     
     text_out_val = plt.text(base_value, 0.33, 'base value',
                             fontsize=fontsize, alpha=0.5,
@@ -396,7 +396,7 @@ def draw_additive_plot(data, figsize, show, text_rotation=0, min_perc=0.05, font
     
     # Add output label
     out_names = data['outNames'][0]
-    # draw_output_element(out_names, out_value, ax, fontsize=fontsize)
+    draw_output_element(out_names, out_value, ax, fontsize=fontsize)
 
     # Scale axis
     if data['link'] == 'logit':
