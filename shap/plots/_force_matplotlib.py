@@ -26,7 +26,7 @@ def draw_bars(out_value, features, feature_type, width_separators, width_bar):
             
             separator_indent = np.abs(width_separators)
             separator_pos = left_bound
-            colors = ['#FF0D57', '#FFC3D5']
+            colors = ['#FF7F0E', '#FFECDB']
         else:
             left_bound = pre_val
             right_bound = float(features[0])
@@ -34,7 +34,7 @@ def draw_bars(out_value, features, feature_type, width_separators, width_bar):
             
             separator_indent = - np.abs(width_separators)
             separator_pos = right_bound
-            colors = ['#1E88E5', '#D1E6FA']
+            colors = ['#1F77B4', '#D1ECFF']
         
         # Create rectangle
         if index == 0:
@@ -83,11 +83,11 @@ def draw_labels(fig, ax, out_value, features, feature_type, offset_text, total_e
     
     # Define variables specific to positive and negative effect features
     if feature_type == 'positive':
-        colors = ['#FF0D57', '#FFC3D5']
+        colors = ['#FF7F0E', '#FFECDB']
         alignement = 'right'
         sign = 1
     else:
-        colors = ['#1E88E5', '#D1E6FA']
+        colors = ['#1F77B4', '#D1ECFF']
         alignement = 'left'
         sign = -1
     
@@ -296,19 +296,19 @@ def draw_base_element(base_value, ax, fontsize=12):
 
 def draw_higher_lower_element(out_value, offset_text, fontsize=13):
     plt.text(out_value - offset_text, 0.405, 'higher',
-             fontsize=fontsize, color='#FF0D57',
+             fontsize=fontsize, color='#FF7F0E',
              horizontalalignment='right')
 
     plt.text(out_value + offset_text, 0.405, 'lower',
-             fontsize=fontsize, color='#1E88E5',
+             fontsize=fontsize, color='#1F77B4',
              horizontalalignment='left')
     
     plt.text(out_value, 0.4, r'$\leftarrow$',
-             fontsize=fontsize, color='#1E88E5',
+             fontsize=fontsize, color='#1F77B4',
              horizontalalignment='center')
     
     plt.text(out_value, 0.425, r'$\rightarrow$',
-             fontsize=fontsize, color='#FF0D57',
+             fontsize=fontsize, color='#FF7F0E',
              horizontalalignment='center')
 
 
