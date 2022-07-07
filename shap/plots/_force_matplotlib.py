@@ -187,9 +187,9 @@ def draw_labels(fig, ax, out_value, features, feature_type, offset_text, total_e
         
     # Create shading
     if feature_type == 'positive':
-        colors = np.array([(255, 13, 87), (255, 255, 255)]) / 255.
+        colors = np.array([(255, 127, 14), (255, 255, 255)]) / 255.
     else:
-        colors = np.array([(30, 136, 229), (255, 255, 255)]) / 255.
+        colors = np.array([(31, 118, 180), (255, 255, 255)]) / 255.
     
     cm = matplotlib.colors.LinearSegmentedColormap.from_list('cm', colors)
     
