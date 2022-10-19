@@ -26,7 +26,7 @@ def draw_bars(out_value, features, feature_type, width_separators, width_bar):
             
             separator_indent = np.abs(width_separators)
             separator_pos = left_bound
-            colors = ['#FF7F0E', '#FFECDB']
+            colors = ['#828282', '#C6C6C6']
         else:
             left_bound = pre_val
             right_bound = float(features[0])
@@ -83,7 +83,7 @@ def draw_labels(fig, ax, out_value, features, feature_type, offset_text, total_e
     
     # Define variables specific to positive and negative effect features
     if feature_type == 'positive':
-        colors = ['#FF7F0E', '#FFECDB']
+        colors = ['#828282', '#c6c6c6']
         alignement = 'right'
         sign = 1
     else:
@@ -187,7 +187,7 @@ def draw_labels(fig, ax, out_value, features, feature_type, offset_text, total_e
         
     # Create shading
     if feature_type == 'positive':
-        colors = np.array([(255, 127, 14), (255, 255, 255)]) / 255.
+        colors = np.array([(130, 130, 130), (255, 255, 255)]) / 255.
     else:
         colors = np.array([(31, 118, 180), (255, 255, 255)]) / 255.
     
@@ -296,7 +296,7 @@ def draw_base_element(base_value, ax, fontsize=12):
 
 def draw_higher_lower_element(out_value, offset_text, fontsize=13):
     plt.text(out_value - offset_text, 0.405, 'higher',
-             fontsize=fontsize, color='#FF7F0E',
+             fontsize=fontsize, color='#828282',
              horizontalalignment='right')
 
     plt.text(out_value + offset_text, 0.405, 'lower',
@@ -308,7 +308,7 @@ def draw_higher_lower_element(out_value, offset_text, fontsize=13):
              horizontalalignment='center')
     
     plt.text(out_value, 0.425, r'$\rightarrow$',
-             fontsize=fontsize, color='#FF7F0E',
+             fontsize=fontsize, color='#828282',
              horizontalalignment='center')
 
 
